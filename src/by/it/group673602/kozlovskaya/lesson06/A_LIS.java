@@ -1,8 +1,10 @@
 package by.it.group673602.kozlovskaya.lesson06;
 
+
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.InputStream;
+import java.util.Arrays;
 import java.util.Scanner;
 
 /*
@@ -46,7 +48,18 @@ public class A_LIS {
         }
         //тут реализуйте логику задачи методами динамического программирования (!!!)
         int result = 0;
+        int[] counts = new int[n];
 
+        Arrays.fill(counts, 0);
+
+        for(int i = 0; i < n - 1; i++){
+            for(int j = i + 1; j < n; j++){
+                if(m[i] < m[j] && counts[j] < counts[i] + 1){
+                    counts[j]++;
+                }
+            }
+        }
+        result = Arrays.stream(counts).max().getAsInt() + 1;
 
         //!!!!!!!!!!!!!!!!!!!!!!!!!     КОНЕЦ ЗАДАЧИ     !!!!!!!!!!!!!!!!!!!!!!!!!
         return result;
@@ -61,4 +74,5 @@ public class A_LIS {
         System.out.print(result);
     }
 }
+
 

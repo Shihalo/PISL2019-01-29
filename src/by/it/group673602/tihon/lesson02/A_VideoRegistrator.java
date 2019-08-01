@@ -26,8 +26,8 @@ public class A_VideoRegistrator {
         List<Double> result;
         result = new ArrayList<>();
         int i=0;                              //i - это индекс события events[i]
-        //комментарии от проверочного решения сохранены для подсказки, но вы можете их удалить.
-                                              //подготовка к жадному поглощению массива событий
+       
+                                              //подготовка к поглощению массива событий
                                               //hint: сортировка Arrays.sort обеспечит скорость алгоритма
                                               //C*(n log n) + C1*n = O(n log n)
         Arrays.sort(events);

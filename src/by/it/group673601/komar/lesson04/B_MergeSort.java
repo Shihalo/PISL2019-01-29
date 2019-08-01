@@ -43,13 +43,13 @@ public class B_MergeSort {
         return result;
     }
 
-    int[] mergeSort(int[] arr, int l, int r){
+    int[] mergeSort(int[] arr, int left, int right){
         int[] result = new int[1];
-        int index = (int)(l + r) / 2;
-        if (l < r){
-           return merge(mergeSort(arr, l, index), mergeSort(arr, index + 1, r));
+        int index = (int)(left + right) / 2;
+        if (left < right){
+           return merge(mergeSort(arr, left, index), mergeSort(arr, index + 1, right));
         }else {
-            result[0] = arr[l];
+            result[0] = arr[left];
             return result;
         }
     }

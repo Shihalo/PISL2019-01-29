@@ -32,14 +32,33 @@ public class B_CountSort {
         }
         //тут реализуйте логику задачи с применением сортировки подсчетом
 
-
-
-
+        int max, min = max = points[0];
+        for (int i = 1; i < points.length; i++) {
+            if (points[i] < min) {
+                min = points[i];
+            }
+            if (points[i] > max) {
+                max = points[i];
+            }
+        }
+        sort(points, min, max);
 
         //!!!!!!!!!!!!!!!!!!!!!!!!!     КОНЕЦ ЗАДАЧИ     !!!!!!!!!!!!!!!!!!!!!!!!!
         return points;
     }
 
+    void sort(int[] array, int min, int max){
+        int[] count = new int[max - min + 1];
+        for (int iterator : array) {
+            count[iterator - min]++;
+        }
+        int idx = 0;
+        for (int i = 0; i < count.length; i++) {
+            for (int j = 0; j < count[i]; j++) {
+                array[idx++] = i + min;
+            }
+        }
+    }
 
     public static void main(String[] args) throws FileNotFoundException {
         String root = System.getProperty("user.dir") + "/src/";

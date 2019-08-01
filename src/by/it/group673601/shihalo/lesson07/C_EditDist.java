@@ -53,9 +53,63 @@ public class C_EditDist {
         //!!!!!!!!!!!!!!!!!!!!!!!!!     НАЧАЛО ЗАДАЧИ     !!!!!!!!!!!!!!!!!!!!!!!!!
 
 
-        String result = "";
+        String result = levensteinInstruction(one, two);
         //!!!!!!!!!!!!!!!!!!!!!!!!!     КОНЕЦ ЗАДАЧИ     !!!!!!!!!!!!!!!!!!!!!!!!!
         return result;
+    }
+
+    private String levensteinInstruction(String s1, String s2) {
+        int[][] D = new int[s1.length()+1][s2.length()+1];
+        String str = "";
+        D[0][0] = 0;
+        for (int j = 1; j < s2.length()+1; j++) {
+            D[0][j] = D[0][j - 1] + 1;
+        }
+        for (int i = 1; i < s1.length()+1; i++) {
+            D[i][0] = D[i - 1][0] + 1;
+            for (int j = 1; j < s2.length()+1; j++) {
+                if (s2.charAt(j-1) != s1.charAt(i-1)) {
+                    if(D[i - 1][j] + 1 < D[i][j - 1] + 1 && D[i - 1][j] + 1 < D[i - 1][j - 1] + 1) { D[i][j] = D[i - 1][j] + 1; }
+                    else {
+                        if (D[i][j - 1] + 1 < D[i - 1][j - 1] + 1) { D[i][j] = D[i][j - 1] + 1; }
+                        else { D[i][j] = D[i - 1][j - 1] + 1; }
+                    }
+                } else { D[i][j] = D[i - 1][j - 1]; }
+            }
+        }
+
+        for(int i = 0; i < s1.length()+1; i++) {
+            for(int j = 0; j < s2.length()+1; j++) {
+                System.out.print(D[i][j] + " ");
+            }
+            System.out.println();
+        }
+        System.out.println(s1+"\n"+s2);
+        int i = s1.length(), j = s2.length();
+        while(i > 0 || j > 0) {
+            if(i == 0 ) { str = str + "," + s2.toCharArray()[j-1] + "+"; j--; }
+            else {
+                if(j == 0) {str = str + "," + s1.toCharArray()[i-1] + "-"; i--; }
+                else {
+                    if (D[i][j] - 1 == D[i][j - 1]) { str = str + "," + s2.toCharArray()[j-1] + "+"; j--; }
+                    else {
+                        if (D[i][j] - 1 == D[i - 1][j - 1]) { str = str + "," + s2.toCharArray()[j-1] + "~"; i--; j--; }
+                        else {
+                            if (D[i][j] - 1 == D[i - 1][j]) { str = str + "," + s1.toCharArray()[i-1] + "-"; i--; }
+                            else {
+                                if (D[i][j] == D[i - 1][j - 1]) { str = str + ",#" ; i--; j--; }
+                            }
+                        }
+                    }
+                }
+            }
+
+        }
+        str = new StringBuffer(str).reverse().toString();
+        //System.out.println(D[s1.length()][s2.length()]);
+
+
+        return str;
     }
 
 

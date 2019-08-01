@@ -71,7 +71,6 @@ public class B_Huffman {
                 str_compare = "";
             }
         }
-
         return result.toString(); //01001100100111
     }
 

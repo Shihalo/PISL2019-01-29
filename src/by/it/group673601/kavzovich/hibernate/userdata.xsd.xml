@@ -1,0 +1,39 @@
+<users>
+  <!--1 or more repetitions:-->
+  <user id="2">
+    <userName>Name2</userName>
+    <secondName>SecondName</secondName>
+    <lastName>LastName</lastName>
+    <phoneNum>12312</phoneNum>
+    <birthday>2008-09-29</birthday>
+    <gender>true</gender>
+    <passportSeria>MC</passportSeria>
+    <passportNum>2323233</passportNum>
+    <identicationNum>1234567890123</identicationNum>
+    <passportWhoGive>Give</passportWhoGive>
+    <passportGiveDate>2004-02-14</passportGiveDate>
+    <livingCity>Brest</livingCity>
+    <address>Address</address>
+    <homePhone>121212</homePhone>
+    <email>string@mail.ru</email>
+    <citizenship>belorussian</citizenship>
+  </user>
+  <user id="3">
+    <userName>Name3</userName>
+    <secondName>SecondName3</secondName>
+    <lastName>LastName3</lastName>
+    <phoneNum>333333</phoneNum>
+    <birthday>2003-09-29</birthday>
+    <gender>true</gender>
+    <passportSeria>MC</passportSeria>
+    <passportNum>3333333</passportNum>
+    <identicationNum>3334567890123</identicationNum>
+    <passportWhoGive>Give3</passportWhoGive>
+    <passportGiveDate>2003-02-14</passportGiveDate>
+    <livingCity>Brest</livingCity>
+    <address>3Address</address>
+    <homePhone>3333212</homePhone>
+    <email>3string@mail.ru</email>
+    <citizenship>russian</citizenship>
+  </user>
+</users>

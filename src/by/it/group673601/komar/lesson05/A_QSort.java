@@ -115,22 +115,16 @@ public class A_QSort {
     }
 
     private int partition(Segment arr[], int begin, int end) {
-        Segment pivot = arr[end];
         int i = (begin - 1);
+        Segment pivot = arr[end];
 
         for (int j = begin; j < end; j++) {
             if (pivot.compareTo(arr[j]) >= 0) {
-                i++;
-
-                Segment swapTemp = arr[i];
+                Segment swapTemp = arr[++i];
                 arr[i] = arr[j];
                 arr[j] = swapTemp;
             }
         }
-
-        Segment swapTemp = arr[i + 1];
-        arr[i + 1] = arr[end];
-        arr[end] = swapTemp;
 
         return i + 1;
     }

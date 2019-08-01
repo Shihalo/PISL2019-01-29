@@ -1,4 +1,4 @@
-package by.it.group673601.kopytko.lesson03;
+ package by.it.group673601.kopytko.lesson03;
 
 import java.io.File;
 import java.io.FileNotFoundException;

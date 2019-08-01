@@ -1,8 +1,11 @@
 package by.it.group673602.kozlovskaya.lesson06;
 
+
+
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.InputStream;
+import java.util.Arrays;
 import java.util.Scanner;
 
 /*
@@ -51,12 +54,67 @@ public class C_LongNotUpSubSeq {
         }
         //тут реализуйте логику задачи методами динамического программирования (!!!)
         int result = 0;
+        int[] counts;
 
+        counts = passageVariety(m, n);
 
+        int ind;
+        ind = getIndMaxSeq(counts);
+
+        result = counts[ind] + 1;
+
+        int[] indMas;
+        indMas = getMaxSeq(counts, m, counts[ind], ind);
+
+        Arrays.stream(indMas).forEach(e -> System.out.print(e + 1 + " "));
+        System.out.println();
         //!!!!!!!!!!!!!!!!!!!!!!!!!     КОНЕЦ ЗАДАЧИ     !!!!!!!!!!!!!!!!!!!!!!!!!
         return result;
     }
 
+    private int[] passageVariety(int[] seq, int length){
+
+        int[] counts = new int[length];
+
+        Arrays.fill(counts, 0);
+
+        for(int i = 0; i < length - 1; i++){
+            for(int j = i + 1; j < length; j++){
+                if(seq[i] >= seq[j] && counts[j] < counts[i] + 1){
+                    counts[j]++;
+                }
+            }
+        }
+
+        return counts;
+    }
+
+    private int getIndMaxSeq(int[] counts){
+        int max = counts[0], ind = 0;
+        for (int i = 1; i < counts.length; i++){
+            if (max < counts[i]){
+                max = counts[i];
+                ind = i;
+            }
+        }
+        return ind;
+    }
+
+    private int[] getMaxSeq(int[] counts,int[] seq, int max, int maxInd){
+
+        int[] indMas = new int[counts[maxInd] + 1];
+        int curInd = maxInd;
+        int masLength = indMas.length - 1;
+        indMas[masLength] = maxInd;
+
+        for(int i = maxInd - 1; i >= 0; i--){
+            if (seq[i] >= seq[curInd] && counts[curInd] - counts[i] == 1){
+                curInd = i;
+                indMas[--masLength] = i;
+            }
+        }
+        return indMas;
+    }
 
     public static void main(String[] args) throws FileNotFoundException {
         String root = System.getProperty("user.dir") + "/src/";

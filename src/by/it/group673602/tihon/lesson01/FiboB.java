@@ -29,8 +29,8 @@ public class FiboB {
         BigInteger y = BigInteger.ONE;
         for (int i = 0; i < n; i++)
         {
-            y = y.add(x);
-            x = y.subtract(x);
+            y = y.add(x);//добавление
+            x = y.subtract(x);//вычитание
         }
         return x;
     }

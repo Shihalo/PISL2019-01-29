@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<schema xmlns="http://www.w3.org/2001/XMLSchema"
+        targetNamespace="http://www.xmlparsing.com/users"
+        xmlns:tns="http://www.xmlparsing.com/users"
+        elementFormDefault="qualified">
+    <element name="users">
+        <complexType>
+            <sequence>
+                <element name="user" maxOccurs="unbounded">
+                    <complexType>
+                        <sequence>
+                            <element name="userName" type="tns:User-name"/>
+                            <element name="secondName" type="tns:User-name"/>
+                            <element name="lastName" type="tns:User-name"/>
+                            <element name="phoneNum" type="tns:Phone"/>
+                            <element name="birthday" type="date"/>
+                            <element name="gender" type="boolean"/>
+                            <element name="passportSeria" type="tns:PassportSeria"/>
+                            <element name="passportNum" type="tns:PassportNumber"/>
+                            <element name="identicationNum" type="tns:IdentificationNum" minOccurs="0" maxOccurs="1"/>
+                            <element name="passportWhoGive" type="string"/>
+                            <element name="passportGiveDate" type="date"/>
+                            <element name="livingCity" type="tns:City"/>
+                            <element name="address" type="string"/>
+                            <element name="homePhone" type="tns:Phone" minOccurs="0" maxOccurs="1"/>
+                            <element name="email" type="string" minOccurs="0" maxOccurs="1"/>
+                            <element name="citizenship" type="tns:Citizenship"/>
+                        </sequence>
+                        <attribute name="id" type="int" use="required"/>
+                    </complexType>
+                </element>
+            </sequence>
+        </complexType>
+    </element>
+    <simpleType name="User-name">
+        <restriction base="string">
+            <minLength value="3"/>
+            <maxLength value="25"/>
+        </restriction>
+    </simpleType>
+
+    <simpleType name="City">
+        <restriction base="string">
+            <enumeration value="Минск"/>
+            <enumeration value="Гомель"/>
+            <enumeration value="Городно"/>
+            <enumeration value="Витебск"/>
+            <enumeration value="Брест"/>
+            <enumeration value="Могилев"/>
+        </restriction>
+    </simpleType>
+
+    <simpleType name="Citizenship">
+        <restriction base="string">
+            <enumeration value="Белорусс"/>
+            <enumeration value="Русский"/>
+            <enumeration value="Украинец"/>
+            <enumeration value="Поляк"/>
+            <enumeration value="Литовец"/>
+        </restriction>
+    </simpleType>
+
+    <simpleType name="Phone">
+        <restriction base="string">
+            <pattern value="[\d]{5,7}"/>
+        </restriction>
+    </simpleType>
+
+    <simpleType name="PassportNumber">
+        <restriction base="string">
+            <pattern value="[\d]{7}"/>
+        </restriction>
+    </simpleType>
+
+    <simpleType name="IdentificationNum">
+        <restriction base="string">
+            <pattern value="[\d]{13}"/>
+        </restriction>
+    </simpleType>
+
+    <simpleType name="PassportSeria">
+        <restriction base="string">
+            <pattern value="[A-Z]{2}"/>
+        </restriction>
+    </simpleType>
+</schema>

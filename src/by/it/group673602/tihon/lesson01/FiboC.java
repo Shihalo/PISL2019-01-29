@@ -42,10 +42,10 @@ public class FiboC {
         //решение практически невозможно найти интуитивно
         //вам потребуется дополнительный поиск информации
         //см. период Пизано
-        ArrayList<Long> s = getSequencePeriod(m);
+        ArrayList<Long> s = getSequencePeriod(m);//последовательность периода Пизано
         long period = s.size() - 2;
         int val = (int)(n % period);
-        return s.get(val);
+        return s.get(val);//возвращение остатка от деления
     }
 
 

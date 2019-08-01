@@ -113,7 +113,6 @@ public class A_QSort {
             for (int j = begin; j < end; j++) {
                 if (pivot.compareTo(arr[j]) >= 0) {
                     i++;
-
                     Segment swapTemp = arr[i];
                     arr[i] = arr[j];
                     arr[j] = swapTemp;

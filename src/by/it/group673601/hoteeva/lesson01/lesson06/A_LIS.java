@@ -45,16 +45,14 @@ public class A_LIS {
             m[i] = scanner.nextInt();
         }
         //тут реализуйте логику задачи методами динамического программирования (!!!)
-
-        int result = solveTask(m);
+        //int result = 0;
+        int result = findNumber(m);
 
         //!!!!!!!!!!!!!!!!!!!!!!!!!     КОНЕЦ ЗАДАЧИ     !!!!!!!!!!!!!!!!!!!!!!!!!
         return result;
     }
-
-    int solveTask(int[] a) {
+    int findNumber(int[] a) {
         int[] d = new int[a.length];
-
 
         for (int i = 0; i < d.length; i++) {
             d[i] = 1;
@@ -76,10 +74,9 @@ public class A_LIS {
         return ans;
     }
 
-
     public static void main(String[] args) throws FileNotFoundException {
         String root = System.getProperty("user.dir") + "/src/";
-        InputStream stream = new FileInputStream(root + "by/it/a_khmelev/lesson06/dataA.txt");
+        InputStream stream = new FileInputStream(root + "by/it/group673601/gertsik/lesson06/dataA.txt");
         A_LIS instance = new A_LIS();
         int result = instance.getSeqSize(stream);
         System.out.print(result);

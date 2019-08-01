@@ -68,9 +68,9 @@ public class C_GetInversions {
         if (arr.length < 2)
             return 0;
 
-        int m = (arr.length + 1) / 2;
-        int left[] = Arrays.copyOfRange(arr, 0, m);
+        int m = arr.length / 2;
         int right[] = Arrays.copyOfRange(arr, m, arr.length);
+        int left[] = Arrays.copyOfRange(arr, 0, m);
 
         return inversionCount(left) + inversionCount(right) + merge(arr, left, right);
     }

@@ -1,8 +1,10 @@
 package by.it.group673602.kozlovskaya.lesson07;
 
+
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.InputStream;
+import java.util.Arrays;
 import java.util.Scanner;
 
 /*
@@ -51,13 +53,100 @@ public class C_EditDist {
 
     String getDistanceEdinting(String one, String two) {
         //!!!!!!!!!!!!!!!!!!!!!!!!!     НАЧАЛО ЗАДАЧИ     !!!!!!!!!!!!!!!!!!!!!!!!!
+        int[][] mas = new int[one.length()+1][two.length()+1];
 
+        initialFill(mas);
 
-        String result = "";
+        populateMas(mas, one, two);
+
+        String[] operations = comeBack(mas, one, two);
+
+        String result = reverse(operations);
+
         //!!!!!!!!!!!!!!!!!!!!!!!!!     КОНЕЦ ЗАДАЧИ     !!!!!!!!!!!!!!!!!!!!!!!!!
         return result;
     }
 
+    private void initialFill(int[][] mas){
+        for(int[] e : mas){
+            Arrays.fill(e, 0);
+        }
+        for (int i =1; i < mas[0].length; i++){
+            mas[0][i] = i;
+        }
+        for (int i =0; i < mas.length;i++){
+            mas[i][0] = i;
+        }
+    }
+
+    private void populateMas(int[][] mas, String one, String two) {
+        for (int i = 1; i < mas.length; i++){
+            for (int j = 1; j < mas[i].length; j++){
+                mas[i][j] = check(one.charAt(i-1), two.charAt(j-1),mas, i, j);
+            }
+        }
+    }
+
+    private int check(char one, char two, int[][] mas, int i, int j){
+        int min;
+        if (mas[i-1][j] < mas[i][j-1]){
+            min = mas[i-1][j] + 1;
+        }
+        else min = mas[i][j-1] + 1;
+
+        if (one != two){
+            if (min > mas[i-1][j-1] + 1){
+                min = mas[i-1][j-1] + 1;
+            }
+        }
+        else if (min > mas[i-1][j-1]){
+            min = mas[i-1][j-1];
+        }
+        return min;
+    }
+
+    private String[] comeBack(int[][] mas, String one, String two){
+        StringBuilder buf = new StringBuilder();
+        int x = mas.length-1;
+        int y = mas[0].length-1;
+        while (x > 0 || y > 0){
+            if (x > 0 && y > 0 && mas[x-1][y-1] == mas[x][y] && one.charAt(x-1) == two.charAt(y-1)) {
+                buf.append("#,");
+                x--; y--;
+                continue;
+            }
+            if (x > 0 && y > 0 && mas[x][y] - mas[x-1][y-1] == 1 && one.charAt(x-1) != two.charAt(y-1)){
+                buf.append("~");
+                buf.append(two.charAt(y-1));
+                buf.append(",");
+                x--; y--;
+                continue;
+            }
+            if (x > 0 && mas[x][y] - mas[x-1][y] == 1){
+                buf.append("-");
+                buf.append(one.charAt(x-1));
+                buf.append(",");
+                x--;
+                continue;
+            }
+            if (y > 0 && mas[x][y] - mas[x][y-1]== 1){
+                buf.append("+");
+                buf.append(two.charAt(y-1));
+                buf.append(",");
+                y--;
+            }
+        }
+        return buf.toString().split(",");
+    }
+
+    private String reverse(String[] operations){
+        StringBuilder buf = new StringBuilder();
+        for (int i = operations.length - 1; i >= 0; i--){
+            buf.append(operations[i]);
+            buf.append(",");
+        }
+        return buf.toString();
+    }
 
     public static void main(String[] args) throws FileNotFoundException {
         String root = System.getProperty("user.dir") + "/src/";
